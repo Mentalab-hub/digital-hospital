@@ -3,10 +3,10 @@ import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
 
 
-SUBSCRIPTION = 'projects/hospital-at-home-test/subscriptions/data-sub'
-TOPIC = 'projects/hospital-at-home-test/topics/data_stream'
-DATA_TABLE_SPEC = 'hospital-at-home-test:Recordings.VitalSigns'
-INFO_TABLE_SPEC = 'hospital-at-home-test:Recordings.PatientInfo'
+SUBSCRIPTION = 'projects/digital-hospital-proto/subscriptions/biosignal-stream'
+TOPIC = 'projects/digital-hospital-proto/topics/data_stream'
+DATA_TABLE_SPEC = 'digital-hospital-proto:PatientDataset.VitalSigns'
+INFO_TABLE_SPEC = 'digital-hospital-proto:PatientDataset.PatientInfo'
 
 
 class PrintElement(beam.DoFn):
@@ -21,12 +21,12 @@ class PrintElement(beam.DoFn):
 class BigqueryTransform(beam.DoFn):
     def process(self, element, *args, **kwargs):
         import numpy as np
-        out = {'PatientID': element.attributes['patient_id'],
+        out = {'PatientID': element.attributes['id'],
                'Timestamp': element.attributes['timestamp'],
                'SpO2': int(element.attributes['spo2']),
                'HeartRate': int(element.attributes['hr']),
                'RespRate': float(element.attributes['resp']),
-               'ECG': np.frombuffer(element.data).tolist()
+               # 'ECG': np.frombuffer(element.data).tolist()
                }
         return [out]
 
