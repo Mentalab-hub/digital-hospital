@@ -1,0 +1,4 @@
+[submodule "dh-android-app"]
+	path = dh-android-app
+	url = https://github.com/Mentalab-hub/dh-android-app.git
+	branch = master
