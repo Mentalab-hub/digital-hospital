@@ -2,3 +2,6 @@
 	path = dh-android-app
 	url = https://github.com/Mentalab-hub/dh-android-app.git
 	branch = master
+[submodule "web-app"]
+	path = web-app
+	url = https://github.com/ale-xander/EUvsVirus-Hackathon.git
